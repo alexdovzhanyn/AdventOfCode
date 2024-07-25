@@ -20,10 +20,12 @@ executable advent-of-code
   main-is:             Main.hs
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5,
-                       containers
+                       containers,
+                       split
   other-modules:
                        Y2023.Day1.SolutionPart1,
-                       Y2023.Day1.SolutionPart2
+                       Y2023.Day1.SolutionPart2,
+                       Y2023.Day2.SolutionPart1
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities

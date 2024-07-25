@@ -3,10 +3,12 @@ module Main (main) where
 import Control.Monad (forM_)
 import qualified Y2023.Day1.SolutionPart1 as D1P1
 import qualified Y2023.Day1.SolutionPart2 as D1P2
+import qualified Y2023.Day2.SolutionPart1 as D2P1
 
 solutions :: [[IO Int]]
 solutions = [
-    [ D1P1.getSolution, D1P2.getSolution ]
+    [ D1P1.getSolution, D1P2.getSolution ],
+    [ D2P1.getSolution ]
   ]
 
 
