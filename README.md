@@ -11,7 +11,7 @@ Welcome to my solutions for the [Advent of Code](https://adventofcode.com/) chal
 
 Each year directory contains the solutions for that year in the chosen programming language. Below is the structure for the 2023 solutions in Haskell:
 
-```sh
+```lua
 2023/
 ├── app/
 │ └── Main.hs -- Entry point for running the solutions
