@@ -11,13 +11,13 @@
 -- 
 -- The newly-improved calibration document consists of lines of text; each line originally contained a specific calibration value that the Elves now need to recover. On each line, the calibration value can be found by combining the first digit and the last digit (in that order) to form a single two-digit number.
 
-module Y2023.Day1.SolutionPart1 (getSolution) where
+module Day1.SolutionPart1 (getSolution) where
 
 import Data.Char (isAlpha)
 
 getSolution :: IO Int
 getSolution = do
-  fileContents <- readFile "src/y2023/day1/input.txt"
+  fileContents <- readFile "inputs/day1.txt"
 
   return $ sum $ map parseCalibrationFromLine (lines fileContents)
 

@@ -24,12 +24,12 @@
 -- 
 -- Determine which games would have been possible if the bag had been loaded with only 12 red cubes, 13 green cubes, and 14 blue cubes. What is the sum of the IDs of those games?
 
-module Y2023.Day2.SolutionPart1 (getSolution) where
+module Day2.SolutionPart1 (getSolution) where
 import Data.List.Split (splitOn)
 
 getSolution :: IO Int
 getSolution = do
-  fileContents <- readFile "src/y2023/day2/input.txt"
+  fileContents <- readFile "inputs/day2.txt"
 
   let gamesByIdPairs = map parseGameIdPair (lines fileContents)
   return $ sum $ findPossibleGameIds (12, 13, 14) gamesByIdPairs

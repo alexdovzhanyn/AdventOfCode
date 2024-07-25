@@ -3,7 +3,7 @@
 -- 
 -- Equipped with this new information, you now need to find the real first and last digit on each line. For example:
 
-module Y2023.Day1.SolutionPart2 (getSolution) where
+module Day1.SolutionPart2 (getSolution) where
 
 import qualified Data.Map as Map
 import Data.Char (isDigit)
@@ -12,7 +12,7 @@ import Data.Maybe (fromJust)
 
 getSolution :: IO Int
 getSolution = do
-  fileContents <- readFile "src/y2023/day1/input.txt"
+  fileContents <- readFile "inputs/day1.txt"
 
   return $ sum $ map parseCalibrationFromLine (lines fileContents)
 

@@ -12,8 +12,6 @@ maintainer:          example@example.com
 copyright:           2024 Author name here
 category:            Web
 build-type:          Simple
-extra-source-files:  README.md
-                     CHANGELOG.md
 
 executable advent-of-code
   hs-source-dirs:      src
@@ -23,9 +21,9 @@ executable advent-of-code
                        containers,
                        split
   other-modules:
-                       Y2023.Day1.SolutionPart1,
-                       Y2023.Day1.SolutionPart2,
-                       Y2023.Day2.SolutionPart1
+                       Day1.SolutionPart1,
+                       Day1.SolutionPart2,
+                       Day2.SolutionPart1
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities
