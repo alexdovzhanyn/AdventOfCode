@@ -23,7 +23,8 @@ executable advent-of-code
   other-modules:
                        Day1.SolutionPart1,
                        Day1.SolutionPart2,
-                       Day2.SolutionPart1
+                       Day2.SolutionPart1,
+                       Day2.SolutionPart2
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities
