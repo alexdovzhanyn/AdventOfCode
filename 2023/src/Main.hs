@@ -5,11 +5,14 @@ import qualified Day1.SolutionPart1 as D1P1
 import qualified Day1.SolutionPart2 as D1P2
 import qualified Day2.SolutionPart1 as D2P1
 import qualified Day2.SolutionPart2 as D2P2
+import qualified Day3.SolutionPart1 as D3P1
+import qualified Day3.SolutionPart2 as D3P2
 
 solutions :: [[IO Int]]
 solutions = [
     [ D1P1.getSolution, D1P2.getSolution ],
-    [ D2P1.getSolution, D2P2.getSolution ]
+    [ D2P1.getSolution, D2P2.getSolution ],
+    [ D3P1.getSolution, D3P2.getSolution ]
   ]
 
 
