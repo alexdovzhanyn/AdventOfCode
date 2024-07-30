@@ -24,10 +24,51 @@
 -- In this schematic, there are two gears. The first is in the top left; it has part numbers 467 and 35, so its gear ratio is 16345. The second gear is in the lower right; its gear ratio is 451490. (The * adjacent to 617 is not a gear because it is only adjacent to one part number.) Adding up all of the gear ratios produces 467835.
 
 module Day3.SolutionPart2 (getSolution) where
+import Data.Char (isAlpha, isDigit)
+import Data.List (nub)
 
 getSolution :: IO Int
 getSolution = do
   fileContents <- readFile "inputs/day3.txt"
+  
+  let fileContentLines = lines fileContents
+  let symbols = nub [c | c <- fileContents, not . isAlpha $ c, not . isDigit $ c, c /= '.', c /= '\n']
 
-  -- TODO: Implement
-  0
+  let findConnected = findConnectedPartNumbers (checkIsSymbol symbols) fileContentLines
+
+  pure $ sum $ map findConnected (zip [0..] fileContentLines)
+
+findConnectedPartNumbers :: (Char -> Bool) -> [String] -> (Int, String) -> Int
+findConnectedPartNumbers isSymbol fileLines (lineNum, line) = sum $ foldl collectPartNums [] (zip line [0..]) 
+  where collectPartNums = collectConnectedPartNums isSymbol fileLines lineNum
+
+collectConnectedPartNums :: (Char -> Bool) -> [String] -> Int -> [Int] -> (Char, Int) -> [Int]
+collectConnectedPartNums isSymbol fileLines lineNum collected (c, i) = 
+  if isSymbol c 
+  then let partConnections = (concat $ map (parsePartNums fileLines) [(lineNum - 1, i), (lineNum + 1, i), (lineNum, i)])
+    in case partConnections of
+      [] -> collected
+      [a, b] -> collected ++ [a * b]
+      _ -> collected
+  else collected
+
+parsePartNums :: [String] -> (Int, Int) -> [Int]
+parsePartNums fileLines (lineNum, i)
+  | lineNum < 0 || lineNum > length fileLines || i < 0 || i > lineLength = []
+  | otherwise = 
+    let charAtTarget = (fileLines !! lineNum) !! i
+        (leftOfTarget, rightOfTarget) = splitAt i (fileLines !! lineNum)
+        left = reverse (takeWhile isDigit (reverse leftOfTarget))
+        right = takeWhile isDigit (drop 1 rightOfTarget)
+    in if isDigit charAtTarget
+      then [ parseNum (left ++ [charAtTarget] ++ right) ]
+      else filter (/=0) [ parseNum left, parseNum right]
+  where lineLength = length $ fileLines !! 0
+
+parseNum :: [Char] -> Int
+parseNum [] = 0
+parseNum n = read n
+
+checkIsSymbol :: [Char] -> Char -> Bool
+checkIsSymbol symbols c = c `elem` symbols
+
