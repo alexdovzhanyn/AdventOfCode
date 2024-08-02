@@ -33,9 +33,29 @@
 -- Take a seat in the large pile of colorful cards. How many points are they worth in total?
 
 module Day4.SolutionPart1 (getSolution) where
+import qualified Data.Set as Set
+import Data.List.Split (splitOn)
 
 getSolution :: IO Int
 getSolution = do
   fileContents <- readFile "inputs/day4.txt"
 
-  pure 0
+  pure $ sum $ map getCardValue $ lines fileContents
+
+
+getCardValue :: String -> Int
+getCardValue card = calcPoints winningNumSet (words actual) 0
+  where (_, cardPart) = break (==':') card
+        [winning, actual] = splitOn "|" (drop 1 cardPart)
+        winningNumSet = Set.fromList $ words winning
+
+calcPoints :: Set.Set String -> [String] -> Int -> Int
+calcPoints _ [] totalPoints = totalPoints
+calcPoints winningNums (num:restNums) totalPoints =
+  if Set.member num winningNums
+  then
+    if totalPoints == 0
+    then calcNext 1
+    else calcNext totalPoints * 2
+  else calcNext totalPoints
+  where calcNext = calcPoints winningNums restNums
